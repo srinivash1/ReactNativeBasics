@@ -1,20 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from "react";
+import { View, StyleSheet, Text } from 'react-native';
+import Home from "./components/Home";
+import BlogDetails from './components/BlogDetails';
+import CreateBlog from "./components/CreateBlog";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import UpdateBlog from "./components/UpdateBlog";
 
-export default function App() {
+const Stack = createNativeStackNavigator();
+
+const App = () => { 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <NavigationContainer>
+        <Stack.Navigator initialRouteName="Home">
+          <Stack.Screen name="Home" component={Home}/>
+          <Stack.Screen name="BlogDetails" component={BlogDetails} />
+          <Stack.Screen name="CreateBlog" component={CreateBlog} />
+          <Stack.Screen name="UpdateBlog" component={UpdateBlog}/>
+        </Stack.Navigator>
+      </NavigationContainer>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    backgroundColor: "#fff",
+    flex: 1
+  }
+})
+
+export default App;
